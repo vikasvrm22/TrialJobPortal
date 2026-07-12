@@ -1,0 +1,29 @@
+name: Check Server Starts
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Syntax check
+        run: node -e "require('./server.js')" &
+             sleep 3 &&
+             curl -f http://localhost:3000/ || (echo "Server failed to respond" && exit 1)
+        env:
+          ADMIN_USERNAME: admin
+          ADMIN_PASSWORD: testpass123
+          SESSION_SECRET: test-secret
+          PORT: 3000
