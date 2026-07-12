@@ -1,0 +1,19 @@
+<%- include('_layout-header', { pageTitle: 'Dashboard', adminActive: 'dashboard' }) %>
+
+<div class="admin-topbar">
+  <h1 style="font-size:20px;">Dashboard</h1>
+</div>
+
+<div class="stat-grid">
+  <div class="stat-card"><div class="num"><%= stats.totalJobs %></div><div class="lbl">Total jobs</div></div>
+  <div class="stat-card"><div class="num"><%= stats.publishedJobs %></div><div class="lbl">Published jobs</div></div>
+  <div class="stat-card"><div class="num"><%= stats.totalQuestions %></div><div class="lbl">Quiz questions</div></div>
+  <div class="stat-card"><div class="num"><%= stats.totalAttempts %></div><div class="lbl">Quiz attempts</div></div>
+</div>
+
+<div style="display:flex; gap:12px;">
+  <a href="/admin/jobs/new" class="btn-primary" style="display:inline-block;">+ Naya job add karein</a>
+  <a href="/admin/quiz-questions/new" class="btn-primary" style="display:inline-block; background:#16a34a;">+ Nayi quiz question add karein</a>
+</div>
+
+<%- include('_layout-footer') %>

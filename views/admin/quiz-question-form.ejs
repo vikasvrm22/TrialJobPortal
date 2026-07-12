@@ -1,0 +1,46 @@
+<%- include('_layout-header', { pageTitle: q ? 'Edit Question' : 'New Question', adminActive: 'quiz' }) %>
+
+<h1 style="font-size:20px; margin-bottom:16px;"><%= q ? 'Question edit karein' : 'Nayi question add karein' %></h1>
+
+<form class="admin-form" action="<%= q ? '/admin/quiz-questions/' + q.id + '/edit' : '/admin/quiz-questions/new' %>" method="POST">
+  <div class="form-group">
+    <label>Question</label>
+    <textarea name="question" rows="2" required><%= q ? q.question : '' %></textarea>
+  </div>
+  <div class="form-group">
+    <label>Option A</label>
+    <input type="text" name="option_a" value="<%= q ? q.option_a : '' %>" required>
+  </div>
+  <div class="form-group">
+    <label>Option B</label>
+    <input type="text" name="option_b" value="<%= q ? q.option_b : '' %>" required>
+  </div>
+  <div class="form-group">
+    <label>Option C</label>
+    <input type="text" name="option_c" value="<%= q ? q.option_c : '' %>" required>
+  </div>
+  <div class="form-group">
+    <label>Option D</label>
+    <input type="text" name="option_d" value="<%= q ? q.option_d : '' %>" required>
+  </div>
+  <div class="form-group">
+    <label>Correct option</label>
+    <select name="correct_option" required>
+      <% ['A','B','C','D'].forEach(o => { %>
+        <option value="<%= o %>" <%= q && q.correct_option === o ? 'selected' : '' %>><%= o %></option>
+      <% }) %>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Topic (optional)</label>
+    <input type="text" name="topic" value="<%= q ? q.topic : '' %>" placeholder="e.g. Sports, Polity, Science">
+  </div>
+  <% if (q) { %>
+  <div class="form-group">
+    <label><input type="checkbox" name="active" value="1" style="width:auto;" <%= q.active ? 'checked' : '' %>> Active (quiz mein include hogi)</label>
+  </div>
+  <% } %>
+  <button type="submit" class="btn-primary">Save karein</button>
+</form>
+
+<%- include('_layout-footer') %>

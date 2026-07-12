@@ -1,0 +1,26 @@
+<%- include('partials/header', { pageTitle: 'All Jobs' }) %>
+
+<div class="section-title"><span>All jobs</span></div>
+
+<div class="filter-pills">
+  <a href="/jobs" class="pill <%= !activeCategory ? 'active' : '' %>">All</a>
+  <% categories.forEach(cat => { %>
+    <a href="/jobs?category=<%= encodeURIComponent(cat) %>" class="pill <%= activeCategory === cat ? 'active' : '' %>"><%= cat %></a>
+  <% }) %>
+</div>
+
+<% jobs.forEach(job => { %>
+  <a href="/jobs/<%= job.id %>" class="job-card">
+    <div>
+      <div class="job-title"><%= job.title %></div>
+      <div class="job-meta"><%= job.category %> · Last date: <%= job.last_date || 'N/A' %> · <%= job.qualification || '' %></div>
+    </div>
+    <span class="badge badge-<%= job.status %>"><%= job.status %></span>
+  </a>
+<% }) %>
+
+<% if (jobs.length === 0) { %>
+  <p style="color:#888; font-size:14px; margin-top:20px;">Is category mein koi job nahi mili.</p>
+<% } %>
+
+<%- include('partials/footer') %>

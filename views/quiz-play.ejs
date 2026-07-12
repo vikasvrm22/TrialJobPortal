@@ -1,0 +1,19 @@
+<%- include('partials/header', { pageTitle: 'Quiz' }) %>
+
+<h1 style="font-size:18px; margin-bottom:16px;">Aaj ka quiz — <%= questions.length %> questions</h1>
+
+<form action="/quiz/submit" method="POST">
+  <% questions.forEach((q, idx) => { %>
+    <div class="quiz-question">
+      <div class="qtext"><%= idx + 1 %>. <%= q.question %></div>
+      <label class="quiz-option"><input type="radio" name="q_<%= q.id %>" value="A" required> <%= q.option_a %></label>
+      <label class="quiz-option"><input type="radio" name="q_<%= q.id %>" value="B"> <%= q.option_b %></label>
+      <label class="quiz-option"><input type="radio" name="q_<%= q.id %>" value="C"> <%= q.option_c %></label>
+      <label class="quiz-option"><input type="radio" name="q_<%= q.id %>" value="D"> <%= q.option_d %></label>
+    </div>
+  <% }) %>
+
+  <button type="submit" class="submit-quiz-btn">Submit karein aur result dekhein</button>
+</form>
+
+<%- include('partials/footer') %>

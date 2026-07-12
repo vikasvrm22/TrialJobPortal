@@ -1,0 +1,23 @@
+<%- include('partials/header', { pageTitle: 'Quiz Result' }) %>
+
+<div class="result-box">
+  <p style="color:#777; font-size:14px;">Aapka score</p>
+  <div class="result-score"><%= score %> / <%= total %></div>
+  <p style="color:#777; font-size:13px; margin-top:8px;"><%= Math.round((score/total)*100) %>% correct</p>
+  <a href="/quiz/play"><button class="start-quiz-btn" style="margin-top:16px;">Dobara try karein (naye questions)</button></a>
+</div>
+
+<h2 style="font-size:16px; margin-bottom:12px;">Answer breakdown</h2>
+<% results.forEach((r, idx) => { %>
+  <div class="result-item <%= r.isCorrect ? 'correct' : 'wrong' %>">
+    <div style="font-size:13px; font-weight:600; margin-bottom:6px;"><%= idx + 1 %>. <%= r.question %></div>
+    <div style="font-size:12px; color:#666;">
+      Aapka jawab: <strong><%= r.userAnswer ? r.options[r.userAnswer] : 'Skip kiya' %></strong>
+      <% if (!r.isCorrect) { %>
+        &nbsp;·&nbsp; Sahi jawab: <strong style="color:#16a34a;"><%= r.options[r.correctAnswer] %></strong>
+      <% } %>
+    </div>
+  </div>
+<% }) %>
+
+<%- include('partials/footer') %>

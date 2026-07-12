@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - <%= typeof pageTitle !== 'undefined' ? pageTitle : 'Dashboard' %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="admin-shell">
+    <aside class="admin-sidebar">
+      <div class="logo">⚙️ Admin Panel</div>
+      <a href="/admin" class="<%= adminActive === 'dashboard' ? 'active' : '' %>">📊 Dashboard</a>
+      <a href="/admin/jobs" class="<%= adminActive === 'jobs' ? 'active' : '' %>">💼 Jobs</a>
+      <a href="/admin/quiz-questions" class="<%= adminActive === 'quiz' ? 'active' : '' %>">🧠 Quiz Questions</a>
+      <a href="/" target="_blank">🌐 View Site</a>
+      <form action="/admin/logout" method="POST" style="margin-top:20px; padding:0 20px;">
+        <button type="submit" style="width:100%; background:#333; color:#fff; border:none; padding:8px; border-radius:6px; cursor:pointer; font-size:13px;">Logout</button>
+      </form>
+    </aside>
+    <div class="admin-content">

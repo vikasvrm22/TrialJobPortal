@@ -1,0 +1,30 @@
+<%- include('_layout-header', { pageTitle: 'Quiz Questions', adminActive: 'quiz' }) %>
+
+<div class="admin-topbar">
+  <h1 style="font-size:20px;">Quiz questions manage karein</h1>
+  <a href="/admin/quiz-questions/new" class="btn-primary">+ Nayi question</a>
+</div>
+
+<table class="admin-table">
+  <thead>
+    <tr><th>Question</th><th>Topic</th><th>Correct</th><th>Active</th><th>Actions</th></tr>
+  </thead>
+  <tbody>
+    <% questions.forEach(q => { %>
+      <tr>
+        <td><%= q.question %></td>
+        <td><%= q.topic || '-' %></td>
+        <td><%= q.correct_option %></td>
+        <td><%= q.active ? '✅' : '❌' %></td>
+        <td class="admin-actions">
+          <a href="/admin/quiz-questions/<%= q.id %>/edit">Edit</a>
+          <form action="/admin/quiz-questions/<%= q.id %>/delete" method="POST" style="display:inline;" onsubmit="return confirm('Delete karein?')">
+            <button type="submit" class="btn-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<%- include('_layout-footer') %>

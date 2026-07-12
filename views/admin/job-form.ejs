@@ -1,0 +1,55 @@
+<%- include('_layout-header', { pageTitle: job ? 'Edit Job' : 'New Job', adminActive: 'jobs' }) %>
+
+<h1 style="font-size:20px; margin-bottom:16px;"><%= job ? 'Job edit karein' : 'Naya job add karein' %></h1>
+
+<form class="admin-form" action="<%= job ? '/admin/jobs/' + job.id + '/edit' : '/admin/jobs/new' %>" method="POST">
+  <div class="form-group">
+    <label>Title</label>
+    <input type="text" name="title" value="<%= job ? job.title : '' %>" required>
+  </div>
+  <div class="form-group">
+    <label>Category</label>
+    <select name="category" required>
+      <% ['Central Govt','State Govt','Banking','Railway','Defence'].forEach(c => { %>
+        <option value="<%= c %>" <%= job && job.category === c ? 'selected' : '' %>><%= c %></option>
+      <% }) %>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Total posts</label>
+    <input type="text" name="posts" value="<%= job ? job.posts : '' %>">
+  </div>
+  <div class="form-group">
+    <label>Qualification</label>
+    <input type="text" name="qualification" value="<%= job ? job.qualification : '' %>">
+  </div>
+  <div class="form-group">
+    <label>Last date</label>
+    <input type="date" name="last_date" value="<%= job ? job.last_date : '' %>">
+  </div>
+  <div class="form-group">
+    <label>Apply link (official website)</label>
+    <input type="url" name="apply_link" value="<%= job ? job.apply_link : '' %>">
+  </div>
+  <div class="form-group">
+    <label>Description</label>
+    <textarea name="description" rows="4"><%= job ? job.description : '' %></textarea>
+  </div>
+  <div class="form-group">
+    <label>Status</label>
+    <select name="status">
+      <option value="new" <%= job && job.status === 'new' ? 'selected' : '' %>>New</option>
+      <option value="apply" <%= job && job.status === 'apply' ? 'selected' : '' %>>Apply</option>
+      <option value="result" <%= job && job.status === 'result' ? 'selected' : '' %>>Result</option>
+      <option value="admit" <%= job && job.status === 'admit' ? 'selected' : '' %>>Admit Card</option>
+    </select>
+  </div>
+  <% if (job) { %>
+  <div class="form-group">
+    <label><input type="checkbox" name="published" value="1" style="width:auto;" <%= job.published ? 'checked' : '' %>> Published (website par dikhega)</label>
+  </div>
+  <% } %>
+  <button type="submit" class="btn-primary">Save karein</button>
+</form>
+
+<%- include('_layout-footer') %>

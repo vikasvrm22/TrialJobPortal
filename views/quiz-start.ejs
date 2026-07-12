@@ -1,0 +1,16 @@
+<%- include('partials/header', { pageTitle: 'Daily Current Affairs Quiz' }) %>
+
+<div class="quiz-hero">
+  <h1>🧠 Daily current affairs quiz</h1>
+  <p style="color:#777; font-size:14px;">20 questions · Har attempt pe naye questions · Turant result</p>
+
+  <div class="quiz-stats">
+    <div class="quiz-stat"><div class="num"><%= totalQuestions %></div><div class="lbl">Total questions pool</div></div>
+    <div class="quiz-stat"><div class="num">20</div><div class="lbl">Per attempt</div></div>
+    <div class="quiz-stat"><div class="num"><%= attemptsToday %></div><div class="lbl">Attempts today</div></div>
+  </div>
+
+  <a href="/quiz/play"><button class="start-quiz-btn">Quiz shuru karein</button></a>
+</div>
+
+<%- include('partials/footer') %>

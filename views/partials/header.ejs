@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof pageTitle !== 'undefined' ? pageTitle + ' - ' + siteName : siteName %></title>
+  <meta name="description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'Latest government jobs, results, admit cards aur daily current affairs quiz - ' + siteName + ' par.' %>">
+  <% if (typeof metaKeywords !== 'undefined') { %><meta name="keywords" content="<%= metaKeywords %>"><% } %>
+  <link rel="canonical" href="<%= siteUrl %><%= typeof canonicalPath !== 'undefined' ? canonicalPath : '' %>">
+  <meta name="robots" content="<%= typeof noIndex !== 'undefined' && noIndex ? 'noindex, nofollow' : 'index, follow' %>">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="<%= siteName %>">
+  <meta property="og:title" content="<%= typeof pageTitle !== 'undefined' ? pageTitle : siteName %>">
+  <meta property="og:description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'Latest government jobs, results, admit cards aur daily current affairs quiz.' %>">
+  <meta property="og:url" content="<%= siteUrl %><%= typeof canonicalPath !== 'undefined' ? canonicalPath : '' %>">
+  <meta property="og:locale" content="hi_IN">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="<%= typeof pageTitle !== 'undefined' ? pageTitle : siteName %>">
+  <meta name="twitter:description" content="<%= typeof metaDescription !== 'undefined' ? metaDescription : 'Latest government jobs, results and daily quiz.' %>">
+
+  <% if (typeof jsonLd !== 'undefined') { %>
+  <script type="application/ld+json"><%- JSON.stringify(jsonLd) %></script>
+  <% } %>
+
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="logo">📋 <%= siteName %></a>
+      <nav class="main-nav">
+        <a href="/" class="<%= active === 'home' ? 'active' : '' %>">Home</a>
+        <a href="/jobs" class="<%= active === 'jobs' ? 'active' : '' %>">Jobs</a>
+        <a href="/quiz" class="<%= active === 'quiz' ? 'active' : '' %>">Daily Quiz</a>
+        <a href="/about" class="<%= active === 'about' ? 'active' : '' %>">About</a>
+        <a href="/disclaimer" class="<%= active === 'disclaimer' ? 'active' : '' %>">Disclaimer</a>
+      </nav>
+      <div class="header-actions">
+        <a href="<%= whatsappLink %>" target="_blank" rel="noopener" class="btn btn-whatsapp">WhatsApp</a>
+        <a href="<%= telegramLink %>" target="_blank" rel="noopener" class="btn btn-telegram">Telegram</a>
+      </div>
+    </div>
+    <button class="mobile-menu-btn" onclick="document.querySelector('.main-nav').classList.toggle('open')">☰</button>
+  </header>
+  <main class="site-main">

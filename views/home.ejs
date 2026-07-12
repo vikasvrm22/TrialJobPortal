@@ -1,0 +1,52 @@
+<%- include('partials/header', { pageTitle: 'Home' }) %>
+
+<div class="hero">
+  <h1>Latest govt jobs, results aur admit cards — sab ek jagah</h1>
+  <p>Daily updates + free current affairs quiz</p>
+</div>
+
+<div class="grid-2col">
+  <div>
+    <div class="section-title">
+      <span>Latest jobs</span>
+      <a href="/jobs">Sab dekhein →</a>
+    </div>
+    <% jobs.forEach(job => { %>
+      <a href="/jobs/<%= job.id %>" class="job-card">
+        <div>
+          <div class="job-title"><%= job.title %></div>
+          <div class="job-meta">Last date: <%= job.last_date || 'N/A' %> · <%= job.qualification || 'See details' %></div>
+        </div>
+        <span class="badge badge-<%= job.status %>"><%= job.status %></span>
+      </a>
+    <% }) %>
+    <% if (jobs.length === 0) { %>
+      <p style="color:#888; font-size:14px;">Abhi koi job listed nahi hai.</p>
+    <% } %>
+  </div>
+
+  <div>
+    <div class="sidebar-card">
+      <h4>Categories</h4>
+      <% categories.forEach(cat => { %>
+        <a href="/jobs?category=<%= encodeURIComponent(cat) %>" style="display:block;">
+          <div class="cat-row"><span><%= cat %></span><span style="color:#888;"><%= counts[cat] %></span></div>
+        </a>
+      <% }) %>
+    </div>
+
+    <div class="sidebar-card" style="text-align:center;">
+      <h4>Daily current affairs quiz</h4>
+      <p style="font-size:12px; color:#777; margin-bottom:12px;">20 naye questions daily, turant result</p>
+      <a href="/quiz" class="btn btn-primary" style="display:inline-block;">Quiz shuru karein</a>
+    </div>
+
+    <div class="sidebar-card" style="text-align:center;">
+      <h4>Free alerts payein</h4>
+      <a href="<%= whatsappLink %>" target="_blank" class="btn btn-whatsapp" style="display:block; margin-bottom:8px;">WhatsApp Channel Join karein</a>
+      <a href="<%= telegramLink %>" target="_blank" class="btn btn-telegram" style="display:block;">Telegram Group Join karein</a>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,31 @@
+<%- include('_layout-header', { pageTitle: 'Jobs', adminActive: 'jobs' }) %>
+
+<div class="admin-topbar">
+  <h1 style="font-size:20px;">Jobs manage karein</h1>
+  <a href="/admin/jobs/new" class="btn-primary">+ Naya job</a>
+</div>
+
+<table class="admin-table">
+  <thead>
+    <tr><th>Title</th><th>Category</th><th>Status</th><th>Published</th><th>Source</th><th>Actions</th></tr>
+  </thead>
+  <tbody>
+    <% jobs.forEach(job => { %>
+      <tr>
+        <td><%= job.title %></td>
+        <td><%= job.category %></td>
+        <td><span class="badge badge-<%= job.status %>"><%= job.status %></span></td>
+        <td><%= job.published ? '✅' : '❌ Draft' %></td>
+        <td><%= job.source %></td>
+        <td class="admin-actions">
+          <a href="/admin/jobs/<%= job.id %>/edit">Edit</a>
+          <form action="/admin/jobs/<%= job.id %>/delete" method="POST" style="display:inline;" onsubmit="return confirm('Delete karein?')">
+            <button type="submit" class="btn-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<%- include('_layout-footer') %>
